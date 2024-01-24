@@ -26,4 +26,10 @@ public class CrawlerTest
 	            () -> assertEquals("Invalid max depth value: The value of max depth should be an integer and greater than 0!", negativeValueException.getMessage()),
 	            () -> assertEquals("Invalid max depth value: The value of max depth should be an integer and greater than 0!", nonIntegerValueException.getMessage())); 
     }
+    @Test
+    public void invalidURLExceptionTest()
+    {
+    	Throwable exception = assertThrows(RuntimeException.class, () -> crawler.crawl("", "hgjll777", ""));
+    	assertEquals("Invalid URL!", exception.getMessage()); 
+    }
 }

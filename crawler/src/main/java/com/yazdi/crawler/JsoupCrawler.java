@@ -1,5 +1,7 @@
 package com.yazdi.crawler;
 
+import java.net.URL;
+
 public class JsoupCrawler implements Crawler {
 	
 	private Integer convertStringToInteger(String strNum) {
