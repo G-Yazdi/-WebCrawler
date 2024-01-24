@@ -14,11 +14,16 @@ public class CrawlerTest
 	
 	@BeforeAll 
 	public static void init() {
+		crawler = new JsoupCrawler();
 	}
     @Test
     public void invalidMaxDepthExceptionTest()
     {
-    	Throwable exception = assertThrows(RuntimeException.class, () -> crawler.crawl("", "", -1));
-		assertEquals("Invalid max depth value: The value of max depth should be an integer and greater than 0", exception.getMessage());
+    	Throwable negativeValueException = assertThrows(RuntimeException.class, () -> crawler.crawl("", "", "-1"));
+    	Throwable nonIntegerValueException = assertThrows(RuntimeException.class, () -> crawler.crawl("", "", "0.1"));
+		
+		assertAll(
+	            () -> assertEquals("Invalid max depth value: The value of max depth should be an integer and greater than 0!", negativeValueException.getMessage()),
+	            () -> assertEquals("Invalid max depth value: The value of max depth should be an integer and greater than 0!", nonIntegerValueException.getMessage())); 
     }
 }
