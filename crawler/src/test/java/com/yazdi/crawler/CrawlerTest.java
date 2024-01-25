@@ -30,12 +30,12 @@ public class CrawlerTest
     public void invalidURLExceptionTest()
     {
     	Throwable exception = assertThrows(RuntimeException.class, () -> crawler.crawl("", "hgjll777", "4"));
-    	assertEquals("Invalid URL!", exception.getMessage()); 
+    	assertEquals("Invalid URL format: the format of the URL is incorrect!", exception.getMessage()); 
     }
     @Test
     public void invalidDomainExceptionTest()
     {
-    	Throwable exception = assertThrows(RuntimeException.class, () -> crawler.crawl("hhhh", "https://www.tutorialspoint.com/", "4"));
-    	assertEquals("Invalid Domain: The domain is not matched with the given URL!", exception.getMessage()); 
+    	Throwable exception = assertThrows(RuntimeException.class, () -> crawler.crawl("hhhh", "https://www.tutorialspoint.com", "4"));
+    	assertEquals("Domain mismatch: Crawler cannot process websites with different domains!", exception.getMessage()); 
     }
 }
