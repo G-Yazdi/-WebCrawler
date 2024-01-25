@@ -2,6 +2,8 @@ package com.yazdi.crawler;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Set;
+
 import org.jsoup.*;
 import org.jsoup.nodes.*;
 
@@ -43,6 +45,9 @@ public class JsoupCrawler implements Crawler {
 		} catch (IOException e) {
 			return null;
 		}
+	}
+	protected Set<String> getLinks(Document doc){
+		return null;
 	}
 	@Override
 	public void crawl(String domain, String strUrl, String strMaxDepth) {

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.IOException;
 
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.BeforeAll;
@@ -53,8 +54,12 @@ public class CrawlerTest
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	 
-    	
+    }
+    @Test
+    public void getLinksTest() {
+    	String html = "<html><body></body><a></a><a></a></html>";
+    	Document doc = Jsoup.parse(html);
+		assertTrue(((JsoupCrawler) crawler).getLinks(doc).size() == 2);
     }
     
 }
