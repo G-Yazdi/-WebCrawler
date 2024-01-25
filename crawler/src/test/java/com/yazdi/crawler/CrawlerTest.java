@@ -18,10 +18,19 @@ import org.junit.jupiter.api.Test;
 public class CrawlerTest 
 {
 	private static Crawler crawler;
+	private static Document document;
 	
 	@BeforeAll 
 	public static void init() {
 		crawler = new JsoupCrawler();
+		String html = "<html><head><title>Sample Page</title></head><body>" +
+		            "<h1>Heading 1</h1>" +
+					"<a href='https://pinzger.github.io/'>Link 1</a>"+
+		            "<a href='https://yazdi.github.io/'>Link 2</a>"+
+		            "<h2>Heading 2</h2>" +
+		            "<h3>Heading 3</h3>" +
+		            "</body></html>";
+		document = Jsoup.parse(html);
 	}
     @Test
     public void invalidMaxDepthExceptionTest()
@@ -57,23 +66,14 @@ public class CrawlerTest
     }
     @Test
     public void getNewUrlsToVisitTest() {
-    	String html = "<html><body><a href='https://pinzger.github.io/'>Link 1</a><a href='https://yazdi.github.io/'>Link 2</a></body></html>";
-    	Document doc = Jsoup.parse(html);
     	Set<String> visitedLinks = Collections.singleton("https://pinzger.github.io/"); 
-		assertTrue(((JsoupCrawler) crawler).getNewUrlsToVisit(doc, visitedLinks).size() == 1);
+		assertTrue(((JsoupCrawler) crawler).getNewUrlsToVisit(document, visitedLinks).size() == 1);
     }
     @Test
     public void getHeadingsTest() {
-    	String html = "<html><head><title>Sample Page</title></head><body>" +
-                "<h1>Heading 1</h1>" +
-    			"<a href='https://pinzger.github.io/'>Link 1</a>"+
-                "<a href='https://yazdi.github.io/'>Link 2</a>"+
-                "<h2>Heading 2</h2>" +
-                "<h3>Heading 3</h3>" +
-                "</body></html>";
-    	String headings = "#Heading 1\n"+"##Heading 2\n"+"###Heading 3\n";
-    	Document doc = Jsoup.parse(html);
-    	assertTrue(((JsoupCrawler) crawler).getHeadings(doc).equals(headings));
+    	String expected = "#Heading 1\n"+"##Heading 2\n"+"###Heading 3\n";
+    	String actual = ((JsoupCrawler) crawler).getHeadings(document);
+    	assertEquals(expected, actual);
     }
     
 }
