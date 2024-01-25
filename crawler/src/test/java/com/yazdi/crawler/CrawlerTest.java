@@ -49,7 +49,7 @@ public class CrawlerTest
     	Document actual = ((JsoupCrawler) crawler).getWebsiteHTMLDocument("https://pinzger.github.io/");
     	try {
 			Document expected = Jsoup.connect("https://pinzger.github.io/").get();
-			assertEquals(expected, actual);
+			assertTrue(expected.hasSameValue(actual));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
