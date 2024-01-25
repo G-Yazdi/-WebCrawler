@@ -60,15 +60,22 @@ public class JsoupCrawler implements Crawler {
 		return newUrlsToVisit;
 	}
 	protected String getHeadings(Document doc) {
-		return "";
+		String headingsStr = "";
+		Elements headings = doc.select("h1, h2, h3, h4, h5, h6");
+		for(Element heading : headings) {
+			String tagName = heading.tagName();
+			int headingNumber = Integer.parseInt(tagName.substring(1));
+			for(int i = 0; i<headingNumber; i++) {
+				headingsStr +="#";
+			}
+			headingsStr += heading.text() + "\n";
+		}
+		return headingsStr;
 	}
 	@Override
 	public void crawl(String domain, String strUrl, String strMaxDepth) {
 		Integer depth = JsoupCrawler.convertStringToInteger(strMaxDepth);
 		validateInputs(depth, strUrl, domain);
-		
-		
-			
-		}
+	}
 
 }
