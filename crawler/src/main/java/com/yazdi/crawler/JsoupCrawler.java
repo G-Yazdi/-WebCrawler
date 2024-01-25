@@ -36,7 +36,12 @@ public class JsoupCrawler implements Crawler {
 	    
 	}
 	public Document getWebsiteHTMLDocument(String url) {
-		return null;
+		try {
+			return Jsoup.connect(url).get();
+			
+		} catch (IOException e) {
+			return null;
+		}
 	}
 	@Override
 	public void crawl(String domain, String strUrl, String strMaxDepth) {
