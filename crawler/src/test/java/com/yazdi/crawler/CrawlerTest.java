@@ -29,7 +29,7 @@ public class CrawlerTest
     @Test
     public void invalidURLExceptionTest()
     {
-    	Throwable exception = assertThrows(RuntimeException.class, () -> crawler.crawl("", "hgjll777", ""));
+    	Throwable exception = assertThrows(RuntimeException.class, () -> crawler.crawl("", "hgjll777", "4"));
     	assertEquals("Invalid URL!", exception.getMessage()); 
     }
 }
