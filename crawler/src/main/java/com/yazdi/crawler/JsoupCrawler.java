@@ -23,10 +23,11 @@ public class JsoupCrawler implements Crawler {
 		}
 	    
 	}
-	private static void validateInputs(Integer maxDepth, URL url, String domain) {
+	private static void validateInputs(Integer maxDepth, String strUrl, String domain) {
 	    if(maxDepth == null || maxDepth < 0) {
 	    	throw new RuntimeException("Invalid max depth value: The value of max depth should be an integer and greater than 0!");
 	    }
+	    URL url = JsoupCrawler.convertStringToURL(strUrl);
 	    if(url == null) {
 	    	throw new RuntimeException("Invalid URL format: the format of the URL is incorrect!");
 	    }
@@ -35,7 +36,7 @@ public class JsoupCrawler implements Crawler {
 	    }
 	    
 	}
-	public Document getWebsiteHTMLDocument(String url) {
+	protected Document getWebsiteHTMLDocument(String url) {
 		try {
 			return Jsoup.connect(url).get();
 			
@@ -46,15 +47,10 @@ public class JsoupCrawler implements Crawler {
 	@Override
 	public void crawl(String domain, String strUrl, String strMaxDepth) {
 		Integer depth = JsoupCrawler.convertStringToInteger(strMaxDepth);
-		URL url = JsoupCrawler.convertStringToURL(strUrl);
-		validateInputs(depth, url, domain);
-		try {
-			Document document = Jsoup.connect("https://pinzger.github.io/").get();
-			
-		} catch (IOException e) {
+		validateInputs(depth, strUrl, domain);
+		
+		
 			
 		}
-		
-	}
 
 }
