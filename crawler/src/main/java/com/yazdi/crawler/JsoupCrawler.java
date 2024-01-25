@@ -46,7 +46,7 @@ public class JsoupCrawler implements Crawler {
 			return null;
 		}
 	}
-	protected Set<String> getLinks(Document doc){
+	protected Set<String> getNewLinks(Document doc, Set<String> visitedLinks){
 		return null;
 	}
 	@Override

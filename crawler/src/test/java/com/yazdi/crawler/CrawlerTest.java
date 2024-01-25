@@ -3,6 +3,9 @@ package com.yazdi.crawler;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -56,10 +59,11 @@ public class CrawlerTest
 		}
     }
     @Test
-    public void getLinksTest() {
-    	String html = "<html><body></body><a></a><a></a></html>";
+    public void getNewLinksTest() {
+    	String html = "<html><body></body><a href='https://pinzger.github.io/'>Link 1</a><a href='https://yazdi.github.io/'>Link 2</a></html>";
     	Document doc = Jsoup.parse(html);
-		assertTrue(((JsoupCrawler) crawler).getLinks(doc).size() == 2);
+    	Set<String> visitedLinks = Collections.singleton("https://pinzger.github.io/"); 
+		assertTrue(((JsoupCrawler) crawler).getNewLinks(doc, visitedLinks).size() == 1);
     }
     
 }
