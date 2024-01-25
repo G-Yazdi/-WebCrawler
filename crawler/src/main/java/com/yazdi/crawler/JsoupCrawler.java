@@ -4,7 +4,7 @@ import java.net.URL;
 
 public class JsoupCrawler implements Crawler {
 	
-	private Integer convertStringToInteger(String strNum) {
+	private static Integer convertStringToInteger(String strNum) {
 	    try {
 	    	return Integer.parseInt(strNum);
 	    } catch (NumberFormatException nfe) {
@@ -12,7 +12,7 @@ public class JsoupCrawler implements Crawler {
 	    }
 	    
 	}
-	private URL convertStringToURL(String url) {
+	private static URL convertStringToURL(String url) {
 		try {
 		    return new URL(url);
 		}catch (Exception e) {
@@ -20,7 +20,7 @@ public class JsoupCrawler implements Crawler {
 		}
 	    
 	}
-	private void validateInputs(Integer maxDepth, URL url, String domain) {
+	private static void validateInputs(Integer maxDepth, URL url, String domain) {
 	    if(maxDepth == null || maxDepth < 0) {
 	    	throw new RuntimeException("Invalid max depth value: The value of max depth should be an integer and greater than 0!");
 	    }
@@ -35,8 +35,8 @@ public class JsoupCrawler implements Crawler {
 
 	@Override
 	public void crawl(String domain, String strUrl, String strMaxDepth) {
-		Integer depth = this.convertStringToInteger(strMaxDepth);
-		URL url = this.convertStringToURL(strUrl);
+		Integer depth = JsoupCrawler.convertStringToInteger(strMaxDepth);
+		URL url = JsoupCrawler.convertStringToURL(strUrl);
 		validateInputs(depth, url, domain);
 		
 	}
