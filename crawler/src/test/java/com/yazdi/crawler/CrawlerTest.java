@@ -2,8 +2,14 @@ package com.yazdi.crawler;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
+
+import org.jsoup.nodes.Document;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 
 /**
  * Unit test for Crawler.
@@ -38,4 +44,17 @@ public class CrawlerTest
     	Throwable exception = assertThrows(RuntimeException.class, () -> crawler.crawl("hhhh", "https://www.tutorialspoint.com", "4"));
     	assertEquals("Domain mismatch: Crawler cannot process websites with different domains!", exception.getMessage()); 
     }
+    @Test
+    public void getWebsiteHTMLDocumentTest() {
+    	Document actual = ((JsoupCrawler) crawler).getWebsiteHTMLDocument("https://pinzger.github.io/");
+    	try {
+			Document expected = Jsoup.connect("https://pinzger.github.io/").get();
+			assertEquals(expected, actual);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	 
+    	
+    }
+    
 }

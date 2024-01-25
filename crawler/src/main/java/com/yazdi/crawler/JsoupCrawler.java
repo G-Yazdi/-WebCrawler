@@ -1,6 +1,9 @@
 package com.yazdi.crawler;
 
+import java.io.IOException;
 import java.net.URL;
+import org.jsoup.*;
+import org.jsoup.nodes.*;
 
 public class JsoupCrawler implements Crawler {
 	
@@ -27,17 +30,25 @@ public class JsoupCrawler implements Crawler {
 	    if(url == null) {
 	    	throw new RuntimeException("Invalid URL format: the format of the URL is incorrect!");
 	    }
-	    if(url.getHost() != domain) {
+	    if(!url.getHost().equals(domain) ){
 	    	throw new RuntimeException("Domain mismatch: Crawler cannot process websites with different domains!");
 	    }
 	    
 	}
-
+	public Document getWebsiteHTMLDocument(String url) {
+		return null;
+	}
 	@Override
 	public void crawl(String domain, String strUrl, String strMaxDepth) {
 		Integer depth = JsoupCrawler.convertStringToInteger(strMaxDepth);
 		URL url = JsoupCrawler.convertStringToURL(strUrl);
 		validateInputs(depth, url, domain);
+		try {
+			Document document = Jsoup.connect("https://pinzger.github.io/").get();
+			
+		} catch (IOException e) {
+			
+		}
 		
 	}
 
