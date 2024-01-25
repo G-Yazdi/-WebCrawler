@@ -2,10 +2,12 @@ package com.yazdi.crawler;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.jsoup.*;
 import org.jsoup.nodes.*;
+import org.jsoup.select.Elements;
 
 public class JsoupCrawler implements Crawler {
 	
@@ -46,8 +48,16 @@ public class JsoupCrawler implements Crawler {
 			return null;
 		}
 	}
-	protected Set<String> getNewLinks(Document doc, Set<String> visitedLinks){
-		return null;
+	protected Set<String> getNewLinks(Document doc, Set<String> visitedUrls){
+		Set<String> newLinks = new HashSet<String>();
+		Elements links = doc.select("a[href]");
+		for(Element link : links) {
+			String url = link.attr("abs:href");
+			if(!visitedUrls.contains(url)) {
+				newLinks.add(url);
+			}
+		}
+		return newLinks;
 	}
 	@Override
 	public void crawl(String domain, String strUrl, String strMaxDepth) {
