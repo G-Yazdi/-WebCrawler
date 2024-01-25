@@ -59,11 +59,11 @@ public class CrawlerTest
 		}
     }
     @Test
-    public void getNewLinksTest() {
+    public void getNewUrlsToVisitTest() {
     	String html = "<html><body></body><a href='https://pinzger.github.io/'>Link 1</a><a href='https://yazdi.github.io/'>Link 2</a></html>";
     	Document doc = Jsoup.parse(html);
     	Set<String> visitedLinks = Collections.singleton("https://pinzger.github.io/"); 
-		assertTrue(((JsoupCrawler) crawler).getNewLinks(doc, visitedLinks).size() == 1);
+		assertTrue(((JsoupCrawler) crawler).getNewUrlsToVisit(doc, visitedLinks).size() == 1);
     }
     
 }

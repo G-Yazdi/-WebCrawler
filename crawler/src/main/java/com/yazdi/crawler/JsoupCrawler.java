@@ -48,16 +48,16 @@ public class JsoupCrawler implements Crawler {
 			return null;
 		}
 	}
-	protected Set<String> getNewLinks(Document doc, Set<String> visitedUrls){
-		Set<String> newLinks = new HashSet<String>();
+	protected Set<String> getNewUrlsToVisit(Document doc, Set<String> visitedUrls){
+		Set<String> newUrlsToVisit = new HashSet<String>();
 		Elements links = doc.select("a[href]");
 		for(Element link : links) {
 			String url = link.attr("abs:href");
 			if(!visitedUrls.contains(url)) {
-				newLinks.add(url);
+				newUrlsToVisit.add(url);
 			}
 		}
-		return newLinks;
+		return newUrlsToVisit;
 	}
 	@Override
 	public void crawl(String domain, String strUrl, String strMaxDepth) {
