@@ -32,4 +32,10 @@ public class CrawlerTest
     	Throwable exception = assertThrows(RuntimeException.class, () -> crawler.crawl("", "hgjll777", "4"));
     	assertEquals("Invalid URL!", exception.getMessage()); 
     }
+    @Test
+    public void invalidDomainExceptionTest()
+    {
+    	Throwable exception = assertThrows(RuntimeException.class, () -> crawler.crawl("hhhh", "https://www.tutorialspoint.com/", "4"));
+    	assertEquals("Invalid Domain: The domain is not matched with the given URL!", exception.getMessage()); 
+    }
 }
