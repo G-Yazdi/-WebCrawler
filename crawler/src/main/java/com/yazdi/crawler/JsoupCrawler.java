@@ -59,7 +59,7 @@ public class JsoupCrawler implements Crawler {
 		}
 		return newUrlsToVisit;
 	}
-	protected String getHeadings(Document doc) {
+	protected String getHeadingsString(Document doc) {
 		String headingsStr = "";
 		Elements headings = doc.select("h1, h2, h3, h4, h5, h6");
 		for(Element heading : headings) {

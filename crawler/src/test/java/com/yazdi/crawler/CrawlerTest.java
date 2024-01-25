@@ -70,9 +70,9 @@ public class CrawlerTest
 		assertTrue(((JsoupCrawler) crawler).getNewUrlsToVisit(document, visitedLinks).size() == 1);
     }
     @Test
-    public void getHeadingsTest() {
+    public void getHeadingsStringTest() {
     	String expected = "#Heading 1\n"+"##Heading 2\n"+"###Heading 3\n";
-    	String actual = ((JsoupCrawler) crawler).getHeadings(document);
+    	String actual = ((JsoupCrawler) crawler).getHeadingsString(document);
     	assertEquals(expected, actual);
     }
     
