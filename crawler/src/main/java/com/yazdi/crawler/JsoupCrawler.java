@@ -59,6 +59,9 @@ public class JsoupCrawler implements Crawler {
 		}
 		return newUrlsToVisit;
 	}
+	protected String getHeadings(Document doc) {
+		return "";
+	}
 	@Override
 	public void crawl(String domain, String strUrl, String strMaxDepth) {
 		Integer depth = JsoupCrawler.convertStringToInteger(strMaxDepth);
